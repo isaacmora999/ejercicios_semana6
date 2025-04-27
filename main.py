@@ -13,9 +13,17 @@ if __name__ == "__main__":
 
     if opcion == "1":
         lista = ListaEstudiantes()
-        lista.agregar(Estudiante("2023001", "Ana", "Lopez", 50, 1.6, "F", 85))
-        lista.agregar(Estudiante("2023002", "Luis", "Martinez", 60, 1.7, "M", 90))
-        lista.agregar(Estudiante("2023003", "Sofia", "Gomez", 55, 1.5, "F", 95))
+        while True:
+            carnet = input("Carnet: ")
+            nombres = input("Nombres: ")
+            apellidos = input("Apellidos: ")
+            peso = float(input("Peso: "))
+            estatura = float(input("Estatura: "))
+            sexo = input("Sexo: ")
+            promedio = float(input("Promedio: "))
+            lista.agregar(Estudiante(carnet, nombres, apellidos, peso, estatura, sexo, promedio))
+            if input("¿Agregar otro estudiante? (s/n): ").lower() != "s":
+                break
         atributo = input("Ordenar por (carnet, nombres, apellidos, peso, estatura, sexo, promedio): ")
         lista.ordenar_por(atributo)
         lista.mostrar()
@@ -31,21 +39,55 @@ if __name__ == "__main__":
 
     elif opcion == "3":
         lista = ListaPacientes()
-        lista.insertar_paciente(Paciente("Pedro Perez", 30, "Fiebre", 2))
-        lista.insertar_paciente(Paciente("Maria Lopez", 25, "Dolor de cabeza", 3))
-        lista.mostrar_pacientes()
-        atendido = lista.atender_paciente()
-        print("Paciente atendido:", atendido.nombre_completo)
-        lista.mostrar_pacientes()
+        while True:
+            print("\n1. Agregar paciente")
+            print("2. Mostrar pacientes")
+            print("3. Atender (eliminar) paciente")
+            print("4. Salir")
+            subopcion = input("Opcion: ")
+            if subopcion == "1":
+                nombre = input("Nombre completo: ")
+                edad = int(input("Edad: "))
+                sintoma = input("Sintoma principal: ")
+                prioridad = int(input("Prioridad (1-5): "))
+                lista.insertar_paciente(Paciente(nombre, edad, sintoma, prioridad))
+            elif subopcion == "2":
+                lista.mostrar_pacientes()
+            elif subopcion == "3":
+                paciente = lista.atender_paciente()
+                if paciente:
+                    print("Paciente atendido:", paciente.nombre_completo)
+                else:
+                    print("No hay pacientes para atender.")
+            elif subopcion == "4":
+                break
 
     elif opcion == "4":
         historial = HistorialAcciones()
-        historial.agregar_accion(Accion("escribir", "Hola"))
-        historial.agregar_accion(Accion("borrar", "o"))
-        historial.agregar_accion(Accion("pegar", " mundo"))
-        print("Deshacer accion:", historial.deshacer().tipo)
-        print("Deshacer accion:", historial.deshacer().tipo)
-        print("Rehacer accion:", historial.rehacer().tipo)
+        while True:
+            print("\n1. Agregar accion")
+            print("2. Deshacer")
+            print("3. Rehacer")
+            print("4. Salir")
+            subopcion = input("Opcion: ")
+            if subopcion == "1":
+                tipo = input("Tipo de accion (escribir, borrar, pegar, copiar): ")
+                contenido = input("Contenido: ")
+                historial.agregar_accion(Accion(tipo, contenido))
+            elif subopcion == "2":
+                accion = historial.deshacer()
+                if accion:
+                    print("Accion deshecha:", accion.tipo)
+                else:
+                    print("No hay accion para deshacer.")
+            elif subopcion == "3":
+                accion = historial.rehacer()
+                if accion:
+                    print("Accion rehecha:", accion.tipo)
+                else:
+                    print("No hay accion para rehacer.")
+            elif subopcion == "4":
+                break
 
     else:
         print("Opcion invalida.")

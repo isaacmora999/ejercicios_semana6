@@ -32,4 +32,5 @@ class HistorialAcciones:
             self.actual = self.actual.next
             return self.actual.data
         return None
+
     

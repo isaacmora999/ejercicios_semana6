@@ -27,7 +27,6 @@ class ListaEstudiantes:
     def ordenar_por(self, atributo):
         if not self.head or not self.head.next:
             return
-
         cambiado = True
         while cambiado:
             cambiado = False
